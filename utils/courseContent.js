@@ -255,12 +255,23 @@ function getModuleFilePath(courseCode, fileName) {
   };
   
   const semester = semesterMap[courseCode] || 'semester_i';
+  // Prefer external URL if configured
+  const external = (window && window.EXTERNAL_NOTES && window.EXTERNAL_NOTES[courseCode] && window.EXTERNAL_NOTES[courseCode][fileName]) || null;
+  if (external) return external;
   return `notes/${semester}/${courseCode}/${fileName}`;
 }
 
 // Function to download a module file
 function downloadModuleFile(courseCode, fileName, moduleTitle) {
   const filePath = getModuleFilePath(courseCode, fileName);
+  const isExternalUrl = (url) => /^https?:\/\//.test(String(url || ''));
+  
+  // If external URL, open in new tab
+  if (isExternalUrl(filePath)) {
+    window.open(filePath, '_blank');
+    showDownloadMessage(`🔗 Opening ${moduleTitle}...`);
+    return;
+  }
   
   // Check if file exists by making a HEAD request
   fetch(filePath, { method: 'HEAD' })

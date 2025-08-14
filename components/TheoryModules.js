@@ -57,6 +57,23 @@ function TheoryModules({ courseCode }) {
     }
   };
 
+  // Helper utilities to resolve external links
+  const extractFileName = (path) => {
+    try {
+      const parts = String(path || '').split('/');
+      return decodeURIComponent(parts[parts.length - 1] || '');
+    } catch (e) {
+      return '';
+    }
+  };
+  const isExternalUrl = (url) => /^https?:\/\//.test(String(url || ''));
+  const resolveLink = (path) => {
+    const fileName = extractFileName(path);
+    const map = (window && window.EXTERNAL_NOTES && window.EXTERNAL_NOTES[courseCode]) || null;
+    const external = map && map[fileName];
+    return external || path;
+  };
+
   // Check if it's a lab course
   if (labCourses[courseCode]) {
     const lab = labCourses[courseCode];
@@ -250,8 +267,10 @@ function TheoryModules({ courseCode }) {
               {module.files.map((file) => (
                 <a
                   key={file.name}
-                  href={file.path}
-                  download
+                  href={resolveLink(file.path)}
+                  target={isExternalUrl(resolveLink(file.path)) ? '_blank' : undefined}
+                  rel={isExternalUrl(resolveLink(file.path)) ? 'noopener noreferrer' : undefined}
+                  download={!isExternalUrl(resolveLink(file.path))}
                   className="flex items-center gap-2 px-4 py-2 bg-white border-2 border-black rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,0.9)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.9)] transition-all text-blue-700 font-semibold"
                 >
                   <span className="icon-download text-lg"></span>
@@ -346,8 +365,10 @@ function TheoryModules({ courseCode }) {
                   ) : (
                     <a
                       key={file.name}
-                      href={file.path}
-                      download
+                      href={resolveLink(file.path)}
+                      target={isExternalUrl(resolveLink(file.path)) ? '_blank' : undefined}
+                      rel={isExternalUrl(resolveLink(file.path)) ? 'noopener noreferrer' : undefined}
+                      download={!isExternalUrl(resolveLink(file.path))}
                       className="flex items-center gap-2 px-4 py-2 bg-white border-2 border-black rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,0.9)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.9)] transition-all text-blue-700 font-semibold"
                     >
                       <span className="icon-download text-lg"></span>
@@ -421,8 +442,10 @@ function TheoryModules({ courseCode }) {
               {module.files.map((file) => (
                 <a
                   key={file.name}
-                  href={file.path}
-                  download
+                  href={resolveLink(file.path)}
+                  target={isExternalUrl(resolveLink(file.path)) ? '_blank' : undefined}
+                  rel={isExternalUrl(resolveLink(file.path)) ? 'noopener noreferrer' : undefined}
+                  download={!isExternalUrl(resolveLink(file.path))}
                   className="flex items-center gap-2 px-4 py-2 bg-white border-2 border-black rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,0.9)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.9)] transition-all text-blue-700 font-semibold"
                 >
                   <span className="icon-download text-lg"></span>
@@ -492,8 +515,10 @@ function TheoryModules({ courseCode }) {
               {module.files.map((file) => (
                 <a
                   key={file.name}
-                  href={file.path}
-                  download
+                  href={resolveLink(file.path)}
+                  target={isExternalUrl(resolveLink(file.path)) ? '_blank' : undefined}
+                  rel={isExternalUrl(resolveLink(file.path)) ? 'noopener noreferrer' : undefined}
+                  download={!isExternalUrl(resolveLink(file.path))}
                   className="flex items-center gap-2 px-4 py-2 bg-white border-2 border-black rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,0.9)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.9)] transition-all text-blue-700 font-semibold"
                 >
                   <span className="icon-download text-lg"></span>
