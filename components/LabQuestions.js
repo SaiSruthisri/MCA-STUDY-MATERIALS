@@ -75,28 +75,28 @@ function LabQuestions({ course }) {
     }
   };
   
- ///ADDED 
- if (labCourses[course] === '20MCA131') {
-  const modules = [
-    {
-      name: 'Programming Lab',
-     files: [
-        { name: 'Python.pdf', path: 'https://drive.google.com/uc?export=download&id=1xYNbAFwheESwjtMx84u5KaPIjO1Eac9A' },
-        { name: 'Tuples and Dictionary.pdf', path: 'https://drive.google.com/uc?export=download&id=1cTlqwN1Kw9fFHDSuIvUZ3_3bY-UFylQd' },
-        { name: 'OOPs Intro.pdf', path: 'https://drive.google.com/uc?export=download&id=1ssR5CCVWX2VslkubHE7qJzdIZHUyGsuD' },
-        { name: 'Class Part 1.pdf', path: 'https://drive.google.com/uc?export=download&id=1UJhXTiZS9g13-uVzUiwc7Nlfr6mCtmI6' },
-        { name: 'Class Part 2.pdf', path: 'https://drive.google.com/uc?export=download&id=16DsmJlEMQFzGzWb8QkLaDPJ63O4V8xX5' },
-        { name: 'Polymorphism.pdf', path: 'https://drive.google.com/uc?export=download&id=1d1mNjSC9vt-5ufo3qNABInNnMvVHkJCT' },
-        { name: 'Abstract Class.pdf', path: 'https://drive.google.com/uc?export=download&id=1502AadJB_t1HJmnb0JZTlJ3A-RyGvK0X' },
-        { name: 'File Handling.pdf', path: 'https://drive.google.com/uc?export=download&id=1yfe2C4x4KbBr6aN3ULd62ZnD9tsMRoTa' },
-        { name: 'Regular Expression.pdf', path: 'https://drive.google.com/uc?export=download&id=1Jtm3Fl4UDkt9UJGYak2TGXZe9dGBhyz_' },
-        { name: 'CSV.pdf', path: 'https://drive.google.com/uc?export=download&id=1Agog0G6UphqWLlxcqzDhm6RcArmOmEAT' },
-      ],
-    },
-  ];
-  return (
+  ///ADDED 
+  if (course && course.code === '20MCA131') {
+    const modules = [
+      {
+        name: 'Programming Lab',
+        files: [
+          { name: 'Python.pdf', path: 'https://drive.google.com/uc?export=download&id=1xYNbAFwheESwjtMx84u5KaPIjO1Eac9A' },
+          { name: 'Tuples and Dictionary.pdf', path: 'https://drive.google.com/uc?export=download&id=1cTlqwN1Kw9fFHDSuIvUZ3_3bY-UFylQd' },
+          { name: 'OOPs Intro.pdf', path: 'https://drive.google.com/uc?export=download&id=1ssR5CCVWX2VslkubHE7qJzdIZHUyGsuD' },
+          { name: 'Class Part 1.pdf', path: 'https://drive.google.com/uc?export=download&id=1UJhXTiZS9g13-uVzUiwc7Nlfr6mCtmI6' },
+          { name: 'Class Part 2.pdf', path: 'https://drive.google.com/uc?export=download&id=16DsmJlEMQFzGzWb8QkLaDPJ63O4V8xX5' },
+          { name: 'Polymorphism.pdf', path: 'https://drive.google.com/uc?export=download&id=1d1mNjSC9vt-5ufo3qNABInNnMvVHkJCT' },
+          { name: 'Abstract Class.pdf', path: 'https://drive.google.com/uc?export=download&id=1502AadJB_t1HJmnb0JZTlJ3A-RyGvK0X' },
+          { name: 'File Handling.pdf', path: 'https://drive.google.com/uc?export=download&id=1yfe2C4x4KbBr6aN3ULd62ZnD9tsMRoTa' },
+          { name: 'Regular Expression.pdf', path: 'https://drive.google.com/uc?export=download&id=1Jtm3Fl4UDkt9UJGYak2TGXZe9dGBhyz_' },
+          { name: 'CSV.pdf', path: 'https://drive.google.com/uc?export=download&id=1Agog0G6UphqWLlxcqzDhm6RcArmOmEAT' },
+        ],
+      },
+    ];
+    return (
       <div className="space-y-8">
-        {modules.map((module, idx) => (
+        {modules.map((module) => (
           <div key={module.name}>
             <h3 className="font-bold text-lg mb-2 dark:text-white">{module.name}</h3>
             <div className="space-y-2">
@@ -117,9 +117,9 @@ function LabQuestions({ course }) {
       </div>
     );
   }
-///
+  ///
   // Check if it's a lab course
-  if (labCourses[course.code] ) { ////
+  if (labCourses[course.code]) {
     const lab = labCourses[course.code];
     return (
       <div className={`min-h-screen ${lab.bgColor} ${lab.darkBgColor} py-16`}>
@@ -191,7 +191,7 @@ function LabQuestions({ course }) {
             </div>
           </div>
         </div>
-
+        
         {/* Additional Repository Links */}
         <div className="flex flex-col gap-2 mt-8">
           <a
